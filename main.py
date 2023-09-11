@@ -75,6 +75,12 @@ def op_code(input_instruction):
         case '0111':
             # Save sotred value of sum to register
             opCodeValue = 7
+        case '1000':
+            # Output register value to console
+            opCodeValue = 8
+        case '1111':
+            # Halt program
+            opCodeValue = 15
         case _:
             opCodeValue = 64
     return opCodeValue
@@ -172,7 +178,16 @@ def store_sum(sum_of_operation, register_position, IAR):
         case '0011':
             registers[3] = sum_of_operation_str
 
-
+def ouput_register_value(register_position):
+    match register_position:
+        case '0000':
+            print(registers[0])
+        case '0001':
+            print(registers[1])
+        case '0010':
+            print(registers[2])
+        case '0011':
+            print(registers[3])
 
 def run_cpu(IAR):
     load_instruction(IAR)
@@ -204,12 +219,16 @@ def run_cpu(IAR):
             subtract_registers(split_instructions[1])
         case 7:
             store_sum(sum_of_operation, split_instructions[1], IAR)
-
+        case 8:
+            ouput_register_value(split_instructions[1])
+        case 15:
+            print("PROGRAM HALT")
+            print(f'Program halted at instruction number {IAR}')
+            sys.exit(0)
 
 
 for i in instructions:
     run_cpu(IAR)
-    print(registers)
     IAR += 1
 
 instructions_file.close()
