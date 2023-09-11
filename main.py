@@ -73,7 +73,7 @@ def op_code(input_instruction):
             # Subtract two values from registers together
             opCodeValue = 6
         case '0111':
-            # Save sotred value of sum to register
+            # Save stored value of sum to register
             opCodeValue = 7
         case '1000':
             # Output register value to console
@@ -98,15 +98,12 @@ def store_register(opCodeValue, instructionValue):
             registers[3] = instructionValue
 
 
-def add_registers(instructionValue):
-    global sum_of_operation
-    n = 2
-    register_positions = [(instructionValue[i:i + n]) for i in range(0, len(instructionValue), n)]
-
+def get_values(register_position_1, register_position_2, registers):
+    global first_value, second_value
     first_value = ''
     second_value = ''
 
-    match register_positions[0]:
+    match register_position_1:
         case '00':
             first_value = registers[0]
         case '01':
@@ -115,7 +112,7 @@ def add_registers(instructionValue):
             first_value = registers[2]
         case '11':
             first_value = registers[3]
-    match register_positions[1]:
+    match register_position_2:
         case '00':
             second_value = registers[0]
         case '01':
@@ -124,6 +121,15 @@ def add_registers(instructionValue):
             second_value = registers[2]
         case '11':
             second_value = registers[3]
+
+    return first_value, second_value, registers
+
+
+def add_registers(instructionValue):
+    global sum_of_operation
+    n = 2
+    register_positions = [(instructionValue[i:i + n]) for i in range(0, len(instructionValue), n)]
+    get_values(register_positions[0], register_positions[1], registers)
     sum_of_operation = int(first_value) + int(second_value)
     return sum_of_operation
 
@@ -132,28 +138,7 @@ def subtract_registers(instructionValue):
     global sum_of_operation
     n = 2
     register_positions = [(instructionValue[i:i + n]) for i in range(0, len(instructionValue), n)]
-
-    first_value = ''
-    second_value = ''
-
-    match register_positions[0]:
-        case '00':
-            first_value = registers[0]
-        case '01':
-            first_value = registers[1]
-        case '10':
-            first_value = registers[2]
-        case '11':
-            first_value = registers[3]
-    match register_positions[1]:
-        case '00':
-            second_value = registers[0]
-        case '01':
-            second_value = registers[1]
-        case '10':
-            second_value = registers[2]
-        case '11':
-            second_value = registers[3]
+    get_values(register_positions[0], register_positions[1], registers)
     sum_of_operation = int(first_value) - int(second_value)
     return sum_of_operation
 
@@ -178,7 +163,8 @@ def store_sum(sum_of_operation, register_position, IAR):
         case '0011':
             registers[3] = sum_of_operation_str
 
-def ouput_register_value(register_position):
+
+def output_register_value(register_position):
     match register_position:
         case '0000':
             print(registers[0])
@@ -188,6 +174,7 @@ def ouput_register_value(register_position):
             print(registers[2])
         case '0011':
             print(registers[3])
+
 
 def run_cpu(IAR):
     load_instruction(IAR)
@@ -220,7 +207,7 @@ def run_cpu(IAR):
         case 7:
             store_sum(sum_of_operation, split_instructions[1], IAR)
         case 8:
-            ouput_register_value(split_instructions[1])
+            output_register_value(split_instructions[1])
         case 15:
             print("PROGRAM HALT")
             print(f'Program halted at instruction number {IAR}')
