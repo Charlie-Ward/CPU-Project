@@ -1,19 +1,9 @@
 import json
 import sys
 
-# Register Setup
-# print(f'Registers loading')
 memory = ['0000', '0000', '0000', '0000']
 IAR = 00000000  # Instruction Address Register
 IR = 00000000  # Instruction Register
-# print(f'Registers loaded')
-
-# print("Register 1:", registers[0])
-# print("Register 2:", registers[1])
-# print("Register 3:", registers[2])
-# print("Register 4:", registers[3])
-# print('Instruction Address Register:', IAR)
-# print('Instruction Register:', IR)
 
 instructions_file = open('instructions.json')
 instructions = json.load(instructions_file)
@@ -213,7 +203,10 @@ def run_cpu(IAR):
             print(f'Program halted at instruction number {IAR}')
             sys.exit(0)
 
-
+        # add swap data between memory modules
+        # add from memory into cache
+        # add memory save check not over 4 long
+        # make sure value is not below 0 for subtract
 for i in instructions:
     run_cpu(IAR)
     IAR += 1
