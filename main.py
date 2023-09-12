@@ -192,6 +192,7 @@ def output_memory_value(memory_position):
         case '0011':
             print(memory[3])
 
+
 def store_in_cache(memory_position, cache, memory):
     match memory_position:
         case '0000':
@@ -203,6 +204,7 @@ def store_in_cache(memory_position, cache, memory):
         case '0011':
             cache = memory[3]
     return cache
+
 
 def save_from_cache(memory_position, cache, memory):
     match memory_position:
@@ -216,8 +218,10 @@ def save_from_cache(memory_position, cache, memory):
             memory[3] = cache
     return memory
 
+
 def print_cache(cache):
     print(cache)
+
 
 def swap_memory(instructionValue, IAR, memory):
     n = 2
@@ -248,7 +252,6 @@ def swap_memory(instructionValue, IAR, memory):
     memory[secondposition] = memory[firstposition]
 
     return memory
-
 
 
 def run_cpu(IAR):
@@ -299,6 +302,8 @@ def run_cpu(IAR):
             sys.exit(0)
         case _:
             error_gen(4, IAR)
+
+
 for i in instructions:
     run_cpu(IAR)
     IAR += 1
