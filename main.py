@@ -3,7 +3,7 @@ import sys
 
 # Register Setup
 # print(f'Registers loading')
-registers = ['0000', '0000', '0000', '0000']
+memory = ['0000', '0000', '0000', '0000']
 IAR = 00000000  # Instruction Address Register
 IR = 00000000  # Instruction Register
 # print(f'Registers loaded')
@@ -89,13 +89,13 @@ def op_code(input_instruction):
 def store_register(opCodeValue, instructionValue):
     match opCodeValue:
         case 1:
-            registers[0] = instructionValue
+            memory[0] = instructionValue
         case 2:
-            registers[1] = instructionValue
+            memory[1] = instructionValue
         case 3:
-            registers[2] = instructionValue
+            memory[2] = instructionValue
         case 4:
-            registers[3] = instructionValue
+            memory[3] = instructionValue
 
 
 def get_values(register_position_1, register_position_2, registers):
@@ -129,7 +129,7 @@ def add_registers(instructionValue):
     global sum_of_operation
     n = 2
     register_positions = [(instructionValue[i:i + n]) for i in range(0, len(instructionValue), n)]
-    get_values(register_positions[0], register_positions[1], registers)
+    get_values(register_positions[0], register_positions[1], memory)
     sum_of_operation = int(first_value) + int(second_value)
     return sum_of_operation
 
@@ -138,7 +138,7 @@ def subtract_registers(instructionValue):
     global sum_of_operation
     n = 2
     register_positions = [(instructionValue[i:i + n]) for i in range(0, len(instructionValue), n)]
-    get_values(register_positions[0], register_positions[1], registers)
+    get_values(register_positions[0], register_positions[1], memory)
     sum_of_operation = int(first_value) - int(second_value)
     return sum_of_operation
 
@@ -155,25 +155,25 @@ def store_sum(sum_of_operation, register_position, IAR):
         sum_of_operation_str = '0' + sum_of_operation_str
     match register_position:
         case '0000':
-            registers[0] = sum_of_operation_str
+            memory[0] = sum_of_operation_str
         case '0001':
-            registers[1] = sum_of_operation_str
+            memory[1] = sum_of_operation_str
         case '0010':
-            registers[2] = sum_of_operation_str
+            memory[2] = sum_of_operation_str
         case '0011':
-            registers[3] = sum_of_operation_str
+            memory[3] = sum_of_operation_str
 
 
 def output_register_value(register_position):
     match register_position:
         case '0000':
-            print(registers[0])
+            print(memory[0])
         case '0001':
-            print(registers[1])
+            print(memory[1])
         case '0010':
-            print(registers[2])
+            print(memory[2])
         case '0011':
-            print(registers[3])
+            print(memory[3])
 
 
 def run_cpu(IAR):
