@@ -31,7 +31,7 @@ def error_gen(errorNumber, instructionNumber):
         case 8:
             print("Cannot transfer memory values between itself")
 
-    print("For documentation visit https://charlie-ward.info")  # ADD PROPER DOCUMENTATION
+    print("For documentation visit https://github.com/Charlie-Ward/CPU-Project#readme")
     sys.exit(errorNumber)
 
 
