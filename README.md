@@ -22,7 +22,7 @@
 #### 1101 <- Parameters
 #### "} <- Closing
 ### So in your file the instruction would look like this
-#### {"1" : "01101101}
+#### {"1" : "01101101"}
 
 ### Instruction Database
 
