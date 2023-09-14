@@ -1,3 +1,12 @@
+# /*******************************************************
+#  * Copyright (C) 2023 Charlie Ward charlieward0101@gmail.com
+#  *
+#  * This file is part of CPU-Project.
+#  *
+#  * CPU-Project can not be copied and/or distributed without the express
+#  * permission of Charlie Ward
+#  *******************************************************/
+
 import json
 import sys
 
