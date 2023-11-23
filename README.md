@@ -40,3 +40,4 @@
 | "1010" | Store cache to a memory slot                   | Binary value of memory position with two zeros at the front                             |
 | "1011" | Print cache value                              | N/A                                                                                     |
 | "1100" | Place memory slot value into a new memory slot | Binary Value of memory slot to take from THEN binary value of memory slot to place into |
+| "1111" | Halt the program                               | N/A                                                                                     |
